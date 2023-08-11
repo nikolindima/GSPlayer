@@ -19,7 +19,7 @@ public enum VideoCacheManager {
         }
         return directory
             .appendingPathComponent(url.absoluteString.md5)
-            .appendingPathComponent(extention)
+            .appendingPathExtension(extention)!
     }
     
     public static func cachedConfiguration(for url: URL) throws -> VideoCacheConfiguration {
