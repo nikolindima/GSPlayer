@@ -67,7 +67,16 @@ extension AVPlayerItem {
                 code: -1,
                 userInfo: [NSLocalizedDescriptionKey: "Wrong url \(url.absoluteString)，unable to initialize Loader"]
             ))
-            self.init(url: url)
+            // Создание словаря с заголовками
+            let headers = ["Authorization": "Basic dWk6MTIzNDU2"]
+            
+            // Создание опций для AVURLAsset с заголовками
+            let options = ["AVURLAssetHTTPHeaderFieldsKey": headers]
+            
+            // Создание AVURLAsset с заданным URL и заголовками
+            let urlAsset = AVURLAsset(url: url, options: options)
+            urlAsset.resourceLoader.setDelegate(VideoLoadManager.shared, queue: .main)
+            self.init(asset: urlAsset)
             return
         }
         
